@@ -1,0 +1,43 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+*.egg-info/
+
+# ML artifacts (large / regenerable)
+*.pkl
+*.joblib
+models/*.bin
+
+# Databases
+*.sqlite
+*.sqlite3
+*.db
+
+# Node / React
+node_modules/
+dist/
+build/
+.cache/
+
+# Env / secrets
+.env
+.env.local
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
+
+# AI / assistant artifacts (keep out of repo)
+CLAUDE.md
+AGENTS.md
+GEMINI.md
+.claude/
+.cursor/
+.aider*
+docs/specs/
+MEMORY.md
+*.ai.md
