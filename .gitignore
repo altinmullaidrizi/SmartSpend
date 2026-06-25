@@ -6,10 +6,11 @@ venv/
 env/
 *.egg-info/
 
-# ML artifacts (large / regenerable)
+# ML artifacts + generated data (large / regenerable)
 *.pkl
 *.joblib
-models/*.bin
+backend/models/
+backend/data/
 
 # Databases
 *.sqlite
