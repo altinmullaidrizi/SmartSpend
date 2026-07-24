@@ -4,11 +4,13 @@ from app import models  # noqa: F401  (register tables on SQLModel metadata)
 from app.ml import categorizer
 from app.routers.auth import router as auth_router
 from app.routers.transactions import router as txn_router
+from app.routers.insights import router as insights_router
 
 app = FastAPI(title="SmartSpend")
 
 app.include_router(auth_router)
 app.include_router(txn_router)
+app.include_router(insights_router)
 
 
 @app.on_event("startup")

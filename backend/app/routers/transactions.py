@@ -8,6 +8,7 @@ from sqlmodel import Session, select
 
 from app.auth import get_current_user
 from app.db import get_session
+from app.ml.anomaly import is_anomalous
 from app.ml.categorizer import predict_category
 from app.models import Transaction, User
 from app.schemas import TxnIn, TxnOut, TxnUpdate
@@ -28,12 +29,23 @@ def create_transaction(
     if not category:
         category = predict_category(data.description)
 
+    is_anomaly = False
+    if category is not None:
+        history_amounts = session.exec(
+            select(Transaction.amount_eur).where(
+                Transaction.user_id == user.id,
+                Transaction.category == category,
+            )
+        ).all()
+        is_anomaly = is_anomalous(data.amount_eur, history_amounts)
+
     txn = Transaction(
         user_id=user.id,
         date=data.date or datetime.utcnow(),
         description=data.description,
         amount_eur=data.amount_eur,
         category=category,
+        is_anomaly=is_anomaly,
         source="manual",
     )
     session.add(txn)
