@@ -40,5 +40,6 @@ GEMINI.md
 .cursor/
 .aider*
 docs/specs/
+docs/submission/
 MEMORY.md
 *.ai.md

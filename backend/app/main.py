@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from app.db import init_db
 from app import models  # noqa: F401  (register tables on SQLModel metadata)
 from app.ml import categorizer
@@ -7,6 +8,15 @@ from app.routers.transactions import router as txn_router
 from app.routers.insights import router as insights_router
 
 app = FastAPI(title="SmartSpend")
+
+# Allow the Vite dev server (frontend) to call this API during local development.
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 app.include_router(auth_router)
 app.include_router(txn_router)
