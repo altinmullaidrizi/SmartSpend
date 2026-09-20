@@ -1,26 +1,22 @@
-from __future__ import annotations
-
 import statistics
 from typing import List
 
-MIN_HISTORY = 5
 Z_THRESHOLD = 3.0
-EPSILON = 1e-9
+
+# TODO: try IsolationForest here instead of the z-score, if there is time
 
 
 def is_anomalous(amount: float, history_amounts: List[float]) -> bool:
-    """Decide whether `amount` is an outlier vs. past amounts in the same category.
-
-    Pure function -- no DB access -- so it can be unit tested directly.
-    """
-    if len(history_amounts) < MIN_HISTORY:
+    """Check if amount is an outlier compared to past amounts in the same category."""
+    # Not enough history to say anything useful yet.
+    if len(history_amounts) < 5:
         return False
 
     mean = statistics.mean(history_amounts)
     stdev = statistics.pstdev(history_amounts)
 
-    if stdev < EPSILON:
-        return abs(amount - mean) > EPSILON
+    if stdev < 1e-9:
+        return abs(amount - mean) > 1e-9
 
     z = (amount - mean) / stdev
     return abs(z) > Z_THRESHOLD

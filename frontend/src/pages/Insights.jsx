@@ -14,11 +14,9 @@ export default function Insights() {
       setLoading(true);
       setError("");
       try {
-        const [tipsRes, anomaliesRes] = await Promise.all([
-          api.get("/insights/tips"),
-          api.get("/insights/anomalies"),
-        ]);
+        const tipsRes = await api.get("/insights/tips");
         setTips(tipsRes.data);
+        const anomaliesRes = await api.get("/insights/anomalies");
         setAnomalies(anomaliesRes.data);
       } catch (err) {
         setError("Failed to load insights.");
@@ -40,7 +38,7 @@ export default function Insights() {
           <div className="card">
             <h2>Budget tips</h2>
             {tips.length === 0 ? (
-              <p>Nothing to report — your spending looks on track.</p>
+              <p>Nothing to report. Your spending looks on track.</p>
             ) : (
               <ul className="tips-list">
                 {tips.map((tip, idx) => (
@@ -55,7 +53,7 @@ export default function Insights() {
           <div className="card">
             <h2>Flagged anomalies</h2>
             {anomalies.length === 0 ? (
-              <p>Nothing to report — no unusual transactions found.</p>
+              <p>Nothing to report. No unusual transactions found.</p>
             ) : (
               <table className="txn-table">
                 <thead>

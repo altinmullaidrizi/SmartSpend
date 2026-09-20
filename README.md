@@ -3,14 +3,14 @@
 Personal finance tracker for **Kosovo users** with ML-powered insights.
 Built in English, amounts in **EUR (€)**.
 
-Course project — *Seminar and Lab work in Multidisciplinary Application* (UBT).
+Course project for *Seminar and Lab work in Multidisciplinary Application* (UBT).
 
 ## What it does
 
 - Track transactions (manual add + seeded Kosovo dataset)
 - **Auto-categorize** transactions (ML text classification)
-- **Anomaly detection** — flags unusual spending
-- **Budget tips** — recommendations grounded in Kosovo price/income levels
+- **Anomaly detection**: flags unusual spending
+- **Budget tips**: recommendations grounded in Kosovo price/income levels
 
 ## Stack
 

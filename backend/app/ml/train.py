@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 """Offline training script for the SmartSpend transaction categorizer.
 
 Run from the backend/ directory:
@@ -26,11 +24,10 @@ MODEL_PATH = "models/categorizer.pkl"
 
 
 def build_pipeline() -> Pipeline:
-    """Build the TF-IDF + LogisticRegression pipeline.
+    """TF-IDF + LogisticRegression pipeline.
 
-    Character n-grams (char_wb) work well for short merchant strings because
-    they capture sub-word patterns and are robust to the small suffix variants
-    ("- card", "- online", "- POS") appended by the seed generator.
+    char_wb n-grams gave better accuracy than word n-grams on these short
+    merchant names, so I kept them.
     """
     return Pipeline(
         [
@@ -48,8 +45,7 @@ def build_pipeline() -> Pipeline:
 
 
 def main() -> float:
-    # Generate a large labeled dataset in-process so training does not depend
-    # on the DB or anyone hitting the API.
+    # Generate the dataset here so training does not need the database.
     txns = generate_transactions(n=3000, user_id=0, seed=42)
     X = [t.description for t in txns]
     y = [t.category for t in txns]

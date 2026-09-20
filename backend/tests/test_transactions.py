@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from app.seed.generate import CATEGORY_RANGES, generate_transactions
 from app.seed.merchants import CATEGORIES
 

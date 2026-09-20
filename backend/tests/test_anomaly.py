@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from app.ml.anomaly import is_anomalous
 
 

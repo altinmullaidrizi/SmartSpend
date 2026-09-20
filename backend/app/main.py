@@ -26,8 +26,7 @@ app.include_router(insights_router)
 @app.on_event("startup")
 def on_startup():
     init_db()
-    # Load the trained categorizer if present. A missing model file must not
-    # crash the app -- auto-categorization is simply disabled until trained.
+    # A missing model file should not stop the app from starting.
     if not categorizer.load_model():
         print(
             "WARNING: categorizer model not found; "

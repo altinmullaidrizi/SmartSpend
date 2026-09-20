@@ -9,11 +9,9 @@ engine = create_engine(
 
 
 def init_db() -> None:
-    """Create all tables defined on SQLModel metadata."""
     SQLModel.metadata.create_all(engine)
 
 
 def get_session():
-    """FastAPI dependency that yields a database session."""
     with Session(engine) as session:
         yield session

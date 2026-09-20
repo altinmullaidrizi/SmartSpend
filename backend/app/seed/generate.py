@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 import csv
 import os
 import random
@@ -32,7 +30,7 @@ _SUFFIXES = ["", "", "", " - card", " - online", " - POS"]
 def generate_transactions(
     n: int, user_id: int, seed: Optional[int] = None
 ) -> List[Transaction]:
-    """Generate n unsaved Kosovo-flavoured Transaction objects for a user."""
+    """Build n Transaction objects with Kosovo merchants and prices."""
     rng = random.Random(seed)
     merchant_names = list(MERCHANTS.keys())
     now = datetime.utcnow()
@@ -63,7 +61,7 @@ def generate_transactions(
 def export_training_csv(
     transactions: List[Transaction], path: str = "data/transactions.csv"
 ) -> str:
-    """Write description,category rows to a CSV for Phase 4 ML training."""
+    """Write description,category rows to a CSV used for training."""
     directory = os.path.dirname(path)
     if directory:
         os.makedirs(directory, exist_ok=True)

@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from collections import namedtuple
 
 from app.insights.budget import budget_tips, spend_by_category

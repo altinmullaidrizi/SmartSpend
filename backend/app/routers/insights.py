@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from datetime import datetime
 from typing import List
 
@@ -16,7 +14,7 @@ router = APIRouter(prefix="/insights", tags=["insights"])
 
 
 def _month_bounds(dt: datetime):
-    """Return (start_of_current_month, start_of_previous_month) for dt."""
+    # returns (start of this month, start of last month)
     start_of_current = dt.replace(
         day=1, hour=0, minute=0, second=0, microsecond=0
     )

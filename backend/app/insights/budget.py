@@ -1,13 +1,10 @@
-from __future__ import annotations
-
 from typing import Dict, List
 
 AVG_NET_SALARY_EUR = 550
 
 
 def spend_by_category(transactions: List) -> Dict[str, float]:
-    """Aggregate total amount_eur per category. Transactions with no
-    category are ignored. Pure function -- no DB access."""
+    """Sum amount_eur per category. Uncategorized transactions are skipped."""
     totals: Dict[str, float] = {}
     for txn in transactions:
         category = txn.category
@@ -18,9 +15,7 @@ def spend_by_category(transactions: List) -> Dict[str, float]:
 
 
 def budget_tips(current_month_txns: List, previous_month_txns: List) -> List[dict]:
-    """Compare per-category spend for the current period vs. the previous
-    period and produce Kosovo-contextualized budget tips. Pure function --
-    no DB access."""
+    """Compare this month against last month and build budget tips."""
     current_totals = spend_by_category(current_month_txns)
     previous_totals = spend_by_category(previous_month_txns)
 

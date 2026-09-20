@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from datetime import datetime
 from typing import List, Optional
 
@@ -23,8 +21,7 @@ def create_transaction(
     user: User = Depends(get_current_user),
     session: Session = Depends(get_session),
 ):
-    # Auto-categorize when the client did not supply a category. Falls back to
-    # None (prior behavior) if no model is loaded.
+    # Let the model pick a category if the user did not choose one.
     category = data.category
     if not category:
         category = predict_category(data.description)
@@ -111,6 +108,7 @@ def delete_transaction(
     return None
 
 
+# TODO: add a CSV import endpoint so users can upload a real bank statement
 @router.post("/seed")
 def seed_transactions(
     n: int = Query(default=200, ge=1),
