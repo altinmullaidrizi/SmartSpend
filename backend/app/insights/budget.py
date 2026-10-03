@@ -1,6 +1,7 @@
 from typing import Dict, List
 
-AVG_NET_SALARY_EUR = 550
+# Kosovo Agency of Statistics, average net salary 2025.
+AVG_NET_SALARY_EUR = 636
 
 
 def spend_by_category(transactions: List) -> Dict[str, float]:

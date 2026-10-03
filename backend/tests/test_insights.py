@@ -35,7 +35,7 @@ def test_budget_tips_increase_warning_fires():
 
 def test_budget_tips_salary_threshold_fires():
     previous = []
-    current = [Txn(category="rent", amount_eur=200.0)]  # > 0.3*550=165
+    current = [Txn(category="rent", amount_eur=200.0)]  # > 0.3*636=190.8
     tips = budget_tips(current, previous)
     info_tips = [t for t in tips if t["severity"] == "info"]
     assert len(info_tips) == 1
