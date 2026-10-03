@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { formatEUR } from "./money.js";
+import { formatEUR, formatDate } from "./money.js";
 
 describe("formatEUR", () => {
   it("formats a number as EUR currency", () => {
@@ -13,5 +13,11 @@ describe("formatEUR", () => {
     const result = formatEUR(0);
     expect(result).toContain("€");
     expect(result).toMatch(/0[.,]00/);
+  });
+});
+
+describe("formatDate", () => {
+  it("formats an ISO datetime as dd.mm.yyyy", () => {
+    expect(formatDate("2026-07-28T12:41:49.934621")).toBe("28.07.2026");
   });
 });

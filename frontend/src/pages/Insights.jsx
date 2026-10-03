@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import api from "../api.js";
-import { formatEUR } from "../money.js";
+import { formatEUR, formatDate } from "../money.js";
 import { categoryLabel } from "../categories.js";
 
 export default function Insights() {
@@ -67,7 +67,7 @@ export default function Insights() {
                 <tbody>
                   {anomalies.map((txn) => (
                     <tr key={txn.id} className="anomaly-row">
-                      <td>{txn.date}</td>
+                      <td>{formatDate(txn.date)}</td>
                       <td>{txn.description}</td>
                       <td>{categoryLabel(txn.category)}</td>
                       <td>{formatEUR(txn.amount_eur)}</td>

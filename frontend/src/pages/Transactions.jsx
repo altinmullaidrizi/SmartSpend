@@ -1,6 +1,6 @@
 import { useEffect, useState, useCallback } from "react";
 import api from "../api.js";
-import { formatEUR } from "../money.js";
+import { formatEUR, formatDate } from "../money.js";
 import { CATEGORIES, categoryLabel } from "../categories.js";
 
 const emptyForm = { description: "", amount_eur: "", category: "", date: "" };
@@ -150,7 +150,7 @@ export default function Transactions() {
             <tbody>
               {transactions.map((txn) => (
                 <tr key={txn.id} className={txn.is_anomaly ? "anomaly-row" : ""}>
-                  <td>{txn.date}</td>
+                  <td>{formatDate(txn.date)}</td>
                   <td>{txn.description}</td>
                   <td>{categoryLabel(txn.category)}</td>
                   <td>{formatEUR(txn.amount_eur)}</td>
