@@ -13,10 +13,8 @@ def is_anomalous(amount: float, history_amounts: List[float]) -> bool:
         return False
 
     mean = statistics.mean(history_amounts)
-    stdev = statistics.pstdev(history_amounts)
-
-    if stdev < 1e-9:
-        return abs(amount - mean) > 1e-9
+    # Floor the stdev so near-constant history (e.g. rent) does not flag tiny changes.
+    stdev = max(statistics.pstdev(history_amounts), 0.05 * abs(mean), 1.0)
 
     z = (amount - mean) / stdev
     return abs(z) > Z_THRESHOLD
