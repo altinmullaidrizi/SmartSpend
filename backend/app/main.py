@@ -1,3 +1,5 @@
+import os
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.db import init_db
@@ -26,6 +28,11 @@ app.include_router(insights_router)
 @app.on_event("startup")
 def on_startup():
     init_db()
+    if not os.getenv("SMARTSPEND_SECRET"):
+        print(
+            "WARNING: SMARTSPEND_SECRET is not set; "
+            "using the insecure dev secret for JWT tokens."
+        )
     # A missing model file should not stop the app from starting.
     if not categorizer.load_model():
         print(
