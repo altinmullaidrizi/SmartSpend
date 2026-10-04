@@ -32,7 +32,6 @@ build/
 .idea/
 .vscode/
 
-# AI / assistant artifacts (keep out of repo)
 CLAUDE.md
 AGENTS.md
 GEMINI.md
@@ -43,3 +42,6 @@ docs/specs/
 docs/submission/
 MEMORY.md
 *.ai.md
+
+*.pptx
+*.docx
